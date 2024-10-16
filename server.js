@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
+app.get('/', (req, res) => {
+    res.send('Hello, welcome to Spotify Mini Back!');
+});
 // Эндпоинт для начала процесса авторизации
 app.get('/authorize', (req, res) => {
     const { SPOTIFY_CLIENT_ID, SPOTIFY_REDIRECT_URI } = process.env;
