@@ -39,7 +39,7 @@ app.get('/callback', async (req, res) => {
             }
         });
 
-        res.redirect('http://localhost:3000?token=' + response.data.access_token);
+        res.redirect('https://spotify-mini-front.vercel.app/?token=' + response.data.access_token);
     } catch (error) {
         console.error('Error fetching access token:', error);
         res.status(500).send('Error fetching access token');
