@@ -4,13 +4,13 @@ const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
 app.use(cors());
 app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send('Hello, welcome to Spotify Mini Back!');
 });
+
 // Эндпоинт для начала процесса авторизации
 app.get('/authorize', (req, res) => {
     const { SPOTIFY_CLIENT_ID, SPOTIFY_REDIRECT_URI } = process.env;
@@ -39,7 +39,6 @@ app.get('/callback', async (req, res) => {
             }
         });
 
-        // Вернуть токен или сохранить его в сессии/базе данных
         res.redirect('http://localhost:3000?token=' + response.data.access_token);
     } catch (error) {
         console.error('Error fetching access token:', error);
@@ -47,7 +46,5 @@ app.get('/callback', async (req, res) => {
     }
 });
 
-// Запуск сервера
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Экспортируем обработчик для Vercel
+module.exports = app;
