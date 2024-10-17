@@ -14,14 +14,8 @@ app.get('/', (req, res) => {
 // Эндпоинт для начала процесса авторизации
 app.get('/authorize', (req, res) => {
     const { SPOTIFY_CLIENT_ID, SPOTIFY_REDIRECT_URI } = process.env;
-    const scopes  = [
-        "user-library-read",
-        "user-library-modify",
-        "user-read-playback-state",
-        "playlist-read-private",
-
-    ].join('%20') // Укажите нужные scopes
-    const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${SPOTIFY_CLIENT_ID}&redirect_uri=${encodeURIComponent(SPOTIFY_REDIRECT_URI)}&scope=${encodeURIComponent(scopes)}&show_dialog=true`;
+    const scope = 'user-read-private user-read-email'; // Укажите нужные scopes
+    const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${SPOTIFY_CLIENT_ID}&redirect_uri=${encodeURIComponent(SPOTIFY_REDIRECT_URI)}&scope=${encodeURIComponent(scope)}&show_dialog=true`;
 
     res.redirect(authUrl);
 });
